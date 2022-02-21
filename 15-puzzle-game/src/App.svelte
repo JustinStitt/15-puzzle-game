@@ -6,6 +6,7 @@ import { missing_component } from "svelte/internal";
 
 	let value = 1
 	let user_def = 3
+	let win = false
 
 	const options = [
 		{
@@ -30,6 +31,10 @@ import { missing_component } from "svelte/internal";
 		return (Math.abs(n-f2) > Math.abs(n-c2)) ? c2 : f2
 	}
 
+	const handleWin = (event) => {
+		win = event.detail.win
+	}
+
 	$: {
 		size = getNearestSquare(user_def)
 	}
@@ -39,8 +44,9 @@ import { missing_component } from "svelte/internal";
 
 <main>
 	<h1>Solve</h1>
+	<h2 class='win' class:show={win}>Win</h2>
 	<div class='outer'>
-		<Grid {size}/>
+		<Grid {size} on:win={handleWin}/>
 		<div class='options'>
 			{#each options as option}
 			<button on:click={() => size=option.sz}>
@@ -49,11 +55,26 @@ import { missing_component } from "svelte/internal";
 			{/each}
 			<input min=3 placeholder='Custom' type="number" bind:value={user_def}/>
 		</div>
+		<button on:click={() => win=true}/>
 	</div>
 	
 </main>
 
 <style>
+	.win {
+		visibility: hidden;
+		margin: 0 auto;
+		width: 30%;
+		color: burlywood;
+		background-color: darkolivegreen;
+		border-radius: 3rem;
+		border-color: aliceblue solid 2px;
+	}
+
+	.win.show {
+		visibility: visible;
+	}
+
 	input {
 		background-color: #48919e;
 		color: aliceblue;
@@ -97,6 +118,7 @@ import { missing_component } from "svelte/internal";
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
+		margin-bottom: .25rem;
 	}
 
 	@media (min-width: 640px) {

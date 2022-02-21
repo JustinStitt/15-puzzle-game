@@ -1,10 +1,13 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
     import Tile from "./Tile.svelte"
     export let size = -1;
-    let win = false
     let dim = Math.sqrt(size)
     // get tiles
     let tiles = []
+
 
     const checkWin = () => {
         for (let i = 0; i < size - 1; i++) {
@@ -15,8 +18,10 @@
         return true;
     }
     
-    const handleWin = () => {
-        win = true
+    const handleWin = (_win) => {
+        dispatch('win', {
+            win: _win,
+        });
     }
     
     const isLegalMove = (ni, ei) => {
@@ -40,7 +45,7 @@
         tiles[n_index] = tiles[empty_index]
         tiles[empty_index] = _tmp
         if (checkWin()) {
-            handleWin()
+            handleWin(true)
         }
     }
 
@@ -58,7 +63,7 @@
             tiles[legal_moves[r]] = tiles[eni]
             tiles[eni] = _tmp
         }
-        win = false
+        handleWin(false)
     }
 
     const newArray = (_s) => {
@@ -80,9 +85,6 @@
     {#each tiles as tile}
         <Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
     {/each}
-    {#if win == true}
-            <h1>win!</h1>
-    {/if}
 </div>
 <!--end-html-->
 
@@ -94,7 +96,7 @@
     display: grid;
     /* border: 2px solid red; */
     /* border-radius: 3rem; */
-    padding: 2rem;
+    padding: 1rem;
     gap: 0px;
 }
 
