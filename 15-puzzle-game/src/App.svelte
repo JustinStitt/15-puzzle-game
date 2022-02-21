@@ -1,25 +1,32 @@
 <script>
-import { missing_component } from "svelte/internal";
+import { fix_and_destroy_block, missing_component } from "svelte/internal";
 
 	import Grid from "./components/Grid.svelte"
-	export let size = 9;
+	export let size = 9
 
 	let value = 1
 	let user_def = 3
 	let win = false
 
+	class Rect {
+		constructor(x, y) { 
+			this.x = x
+			this.y = y
+		}
+	}
+
 	const options = [
 		{
 			name: '3x3',
-			sz: 9
+			sz: 9,
 		},
 		{
 			name: '4x4',
-			sz: 16
+			sz: 16,
 		},
 		{
 			name: '5x5',
-			sz: 25
+			sz: 25,
 		},
 	]
 
@@ -39,12 +46,12 @@ import { missing_component } from "svelte/internal";
 		size = getNearestSquare(user_def)
 	}
 
-
 </script>
 
 <main>
-	<h1>Solve</h1>
-	<h2 class='win' class:show={win}>Win</h2>
+	<h1 class:win={win}>Solve{#if win}d{/if}</h1>
+	
+	<!-- <h2 class='win' class:show={win}>Win</h2> -->
 	<div class='outer'>
 		<Grid {size} on:win={handleWin}/>
 		<div class='options'>
@@ -55,15 +62,13 @@ import { missing_component } from "svelte/internal";
 			{/each}
 			<input max=10 min=3 placeholder='Custom' type="number" bind:value={user_def}/>
 		</div>
-		<!-- DEBUG BUTTON LOL <button on:click={() => win=true}/> -->
+		<!-- <button on:click={() => win=true}/> -->
 	</div>
 	
 </main>
 
 <style>
 	.win {
-		visibility: hidden;
-		margin: 0 auto;
 		width: 30%;
 		color: burlywood;
 		background-color: darkolivegreen;
@@ -71,9 +76,15 @@ import { missing_component } from "svelte/internal";
 		border-color: aliceblue solid 2px;
 	}
 
-	.win.show {
+	/* .win.show {
 		visibility: visible;
-	}
+		margin: 0 auto;
+		width: 30%;
+		color: burlywood;
+		background-color: darkolivegreen;
+		border-radius: 3rem;
+		border-color: aliceblue solid 2px;
+	} */
 
 	input {
 		background-color: #48919e;
@@ -81,7 +92,6 @@ import { missing_component } from "svelte/internal";
 		border-radius: .5rem;
 		padding: .5rem;
 		margin: .5rem;
-		width: 60%;
 	}
 	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   		color: aliceblue;
@@ -98,13 +108,17 @@ import { missing_component } from "svelte/internal";
 
 	.options {
 		display: flex;
-		width: 26%;
+		width: 100%;
 	}
 
 	main {
+		display: flex;
+		flex-direction: column;
 		text-align: center;
 		max-width: 240px;
 		margin: 0 auto;
+		justify-content: center;
+		align-items: center;
 	}
 	.outer{
 		display: flex;
