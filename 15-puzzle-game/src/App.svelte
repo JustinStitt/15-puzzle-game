@@ -1,56 +1,50 @@
 <script>
-	export let name;
-	export let id;
-	$: both = name + ' ' + id // macro
+	import Grid from "./components/Grid.svelte"
+    const a = '\xa0'
+	export let size = 9;
 
-	let users = [
+	let value = 1
+
+	const options = [
 		{
-			name: 'Justin',
-			id: 1,
+			name: '3x3',
+			sz: 9
 		},
 		{
-			name: 'Mark',
-			id: 2,
-		}
+			name: '4x4',
+			sz: 16
+		},
+		{
+			name: '5x5',
+			sz: 25
+		},
 	]
-
-	const toggle = () => {
-		id += 1
-	}
-
-	const isEven = (n) => {
-		return !(n & 1)
-	}
-
-	const create_user = (_name) => {
-		users = [...users, {name: _name, id: users[users.length-1].id+1}]
-	}
 
 </script>
 
 <main>
-	<h1>Hello {both} </h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	<button on:click={toggle}>Click</button>
-	{#if isEven(id)}
-		<h4>
-			Even!
-		</h4>
-	{/if}
-	<h2>Users: </h2>
-	{#each users as user}
-		<h3>{user.name}: {user.id}</h3>
+	<h1>Solve</h1>
+	<div class='outer'>
+		<Grid {size}/>
+		<!-- <input type='text' bind:value={size}/> -->
+	</div>
+
+	{#each options as option}
+		<button on:click={() => size=option.sz}>
+			{option.name}
+		</button>
 	{/each}
-	<input type="text" bind:value={name}/>
-	<button on:click={create_user(name)}>Add User</button>
 </main>
 
 <style>
 	main {
 		text-align: center;
-		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+	}
+	.outer{
+		display: flex;
+		justify-content: center;
 	}
 
 	h1 {
