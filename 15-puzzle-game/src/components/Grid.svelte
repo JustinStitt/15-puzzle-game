@@ -45,10 +45,23 @@
         }
     }
 
+    const randomize = (steps) => {
+        for (var i = 0; i < steps; i+=1) {
+            var rni = Math.floor(Math.random() * size)
+            var eni = Math.floor(Math.random() * size)
+            var r = Math.random()
+            if (isLegalMove(rni, eni) && r > .5) {
+                var _tmp = tiles[rni]
+                tiles[rni] = tiles[eni]
+                tiles[eni] = _tmp
+            }
+        }
+    }
+
     const newArray = (_s) => {
         tiles = Array.from(Array(_s).keys()) 
         dim = Math.sqrt(tiles.length)
-        tiles = tiles.sort((a, b) => 0.5 - Math.random()) // shuffle array
+        randomize(10000)
         console.log(tiles)
     }
 
