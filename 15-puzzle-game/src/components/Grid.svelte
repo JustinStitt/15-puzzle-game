@@ -89,7 +89,7 @@
 <!--html-->
 <div class='grid-container' style={`grid-template-columns: repeat(${dim}, 1fr) `}>
     {#each tiles as tile}
-        <Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
+<Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
     {/each}
     
 </div>

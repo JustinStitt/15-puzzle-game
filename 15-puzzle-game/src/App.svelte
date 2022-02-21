@@ -1,19 +1,13 @@
 <script>
 import { fix_and_destroy_block, missing_component } from "svelte/internal";
 
+
 	import Grid from "./components/Grid.svelte"
 	export let size = 9
 
 	let value = 1
 	let user_def = 3
 	let win = false
-
-	class Rect {
-		constructor(x, y) { 
-			this.x = x
-			this.y = y
-		}
-	}
 
 	const options = [
 		{
@@ -52,7 +46,7 @@ import { fix_and_destroy_block, missing_component } from "svelte/internal";
 	<h1 class:win={win}>Solve{#if win}d{/if}</h1>
 	
 	<!-- <h2 class='win' class:show={win}>Win</h2> -->
-	<div class='outer'>
+	<div class='outer' >
 		<Grid {size} on:win={handleWin}/>
 		<div class='options'>
 			{#each options as option}
