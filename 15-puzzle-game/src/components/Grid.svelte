@@ -2,6 +2,8 @@
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
 
+    import { slide } from 'svelte/transition';
+
     import Tile from "./Tile.svelte"
     export let size = -1;
     let dim = Math.sqrt(size)
@@ -75,7 +77,7 @@
     const newArray = (_s) => {
         tiles = Array.from(Array(_s).keys()) 
         dim = Math.sqrt(tiles.length)
-        randomize(250)
+        randomize(100 * size)
         console.log(tiles)
     }
 
@@ -89,7 +91,9 @@
 <!--html-->
 <div class='grid-container' style={`grid-template-columns: repeat(${dim}, 1fr) `}>
     {#each tiles as tile}
-<Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
+        <span transition:slide>
+            <Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
+        </span>
     {/each}
     
 </div>
@@ -108,6 +112,10 @@
     /* border-radius: 3rem; */
     padding: 1rem;
     gap: 0px;
+}
+
+span {
+    display: grid;
 }
 
 

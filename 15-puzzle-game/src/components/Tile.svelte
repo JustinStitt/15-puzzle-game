@@ -10,7 +10,6 @@
     $: {
         computeFontSize(num_tiles)
     }
-
 </script>
 
 <!--html-->
