@@ -55,7 +55,7 @@ import { missing_component } from "svelte/internal";
 			{/each}
 			<input min=3 placeholder='Custom' type="number" bind:value={user_def}/>
 		</div>
-		<button on:click={() => win=true}/>
+		<!-- DEBUG BUTTON LOL <button on:click={() => win=true}/> -->
 	</div>
 	
 </main>

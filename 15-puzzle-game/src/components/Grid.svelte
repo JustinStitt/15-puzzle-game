@@ -7,7 +7,7 @@
     let dim = Math.sqrt(size)
     // get tiles
     let tiles = []
-
+    let clicks = 0;
 
     const checkWin = () => {
         for (let i = 0; i < size - 1; i++) {
@@ -18,6 +18,10 @@
         return true;
     }
     
+    const inc = () => {
+        clicks += 1
+    }
+
     const handleWin = (_win) => {
         dispatch('win', {
             win: _win,
@@ -47,6 +51,7 @@
         if (checkWin()) {
             handleWin(true)
         }
+        inc()
     }
 
     const randomize = (steps) => {
@@ -64,6 +69,7 @@
             tiles[eni] = _tmp
         }
         handleWin(false)
+        clicks = 0
     }
 
     const newArray = (_s) => {
@@ -85,6 +91,10 @@
     {#each tiles as tile}
         <Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
     {/each}
+    
+</div>
+<div>
+    <h2>Count: {clicks}</h2>
 </div>
 <!--end-html-->
 

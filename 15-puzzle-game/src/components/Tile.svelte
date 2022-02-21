@@ -70,7 +70,7 @@ tile {
     font-weight: bold;
     color: aliceblue;
     display: inline;
-    font-family: 'Trebuchet MS', 'Arial';
+    font-family: 'Trebuchet MS', 'Arial', sans-serif;
 }
 
 
