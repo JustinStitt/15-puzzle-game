@@ -45,7 +45,6 @@ import { fix_and_destroy_block, missing_component } from "svelte/internal";
 <main>
 	<h1 class:win={win}>Solve{#if win}d{/if}</h1>
 	
-	<!-- <h2 class='win' class:show={win}>Win</h2> -->
 	<div class='outer' >
 		<Grid {size} on:win={handleWin}/>
 		<div class='options'>
