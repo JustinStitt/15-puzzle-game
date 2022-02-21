@@ -56,6 +56,7 @@
                 tiles[eni] = _tmp
             }
         }
+        win = false
     }
 
     const newArray = (_s) => {
