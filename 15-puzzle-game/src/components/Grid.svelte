@@ -4,13 +4,12 @@
     let win = false
     let dim = Math.sqrt(size)
     // get tiles
-    let tiles = Array.from(Array(size).keys())
-    tiles = tiles.sort((a, b) => 0.5 - Math.random()) // shuffle array
+    let tiles = []
 
     const checkWin = () => {
         for (let i = 0; i < size - 1; i++) {
-            var lm = tiles[i] == 0 ? 9 : tiles[i]
-            var rm = tiles[i+1] == 0 ? 9 : tiles[i+1]
+            var lm = tiles[i] == 0 ? size : tiles[i]
+            var rm = tiles[i+1] == 0 ? size : tiles[i+1]
             if (lm > rm) return false;
         }
         return true;
@@ -21,12 +20,12 @@
     }
     
     const isLegalMove = (ni, ei) => {
+        if (ni < 0 || ni > size - 1) return false;
         var top = tiles[ni-dim]
         var bot = tiles[ni+dim]
         var left = (ni % dim == 0) ? null : tiles[ni-1]
         var right = (ni % dim == dim-1) ? null : tiles[ni+1]
         
-        console.log([top, bot, left, right], [ni, ei])
         if ([top, bot, left, right].includes(tiles[ei])) {
             return true
         } 
@@ -47,14 +46,17 @@
 
     const randomize = (steps) => {
         for (var i = 0; i < steps; i+=1) {
-            var rni = Math.floor(Math.random() * size)
-            var eni = Math.floor(Math.random() * size)
-            var r = Math.random()
-            if (isLegalMove(rni, eni) && r > .5) {
-                var _tmp = tiles[rni]
-                tiles[rni] = tiles[eni]
-                tiles[eni] = _tmp
+            var eni = tiles.findIndex(ele => ele == 0);
+            var legal_moves = []
+            for (var j = eni - dim - 1; j < eni + dim + 1; j += 1) {
+                if (!isLegalMove(j, eni) || j == eni) continue
+                legal_moves.push(j)
             }
+            var r = Math.floor(Math.random() * legal_moves.length)
+
+            var _tmp = tiles[legal_moves[r]]
+            tiles[legal_moves[r]] = tiles[eni]
+            tiles[eni] = _tmp
         }
         win = false
     }
@@ -62,7 +64,7 @@
     const newArray = (_s) => {
         tiles = Array.from(Array(_s).keys()) 
         dim = Math.sqrt(tiles.length)
-        randomize(10000)
+        randomize(250)
         console.log(tiles)
     }
 
