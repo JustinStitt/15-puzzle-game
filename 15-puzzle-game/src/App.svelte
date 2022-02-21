@@ -53,7 +53,7 @@ import { missing_component } from "svelte/internal";
 				{option.name}
 			</button>
 			{/each}
-			<input min=3 placeholder='Custom' type="number" bind:value={user_def}/>
+			<input max=10 min=3 placeholder='Custom' type="number" bind:value={user_def}/>
 		</div>
 		<!-- DEBUG BUTTON LOL <button on:click={() => win=true}/> -->
 	</div>
