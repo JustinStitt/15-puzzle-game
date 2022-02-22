@@ -10,6 +10,7 @@
     // get tiles
     let tiles = []
     let clicks = 0;
+    let win = false;
 
     const checkWin = () => {
         for (let i = 0; i < size - 1; i++) {
@@ -25,6 +26,7 @@
     }
 
     const handleWin = (_win) => {
+        win = _win
         dispatch('win', {
             win: _win,
         });
@@ -91,7 +93,7 @@
 <!--html-->
 <div class='grid-container' style={`grid-template-columns: repeat(${dim}, 1fr) `}>
     {#each tiles as tile}
-        <span transition:slide>
+        <span class:explode-on-win={win} transition:slide>
             <Tile value={tile} on:click={() => handleClick(tile)} num_tiles={size}/>
         </span>
     {/each}
@@ -116,6 +118,24 @@
 
 span {
     display: grid;
+}
+
+.explode-on-win {
+    animation: _explode_ .5s;
+}
+
+@keyframes _explode_ {
+    0% {
+        transform: scale(1)  translate(0, 0);
+        
+	}
+	50% {
+        transform: scale(1.5) rotate(-45deg);
+
+	}
+	100% {
+        transform: scale(1) translate(0, 0);
+	}
 }
 
 

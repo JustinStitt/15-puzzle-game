@@ -42,7 +42,7 @@ import { fix_and_destroy_block, missing_component } from "svelte/internal";
 
 </script>
 
-<main>
+<main class='gradient-rect'>
 	<h1 class:win={win} class='ominous-hover'>Solve{#if win}d{/if}</h1>
 	
 	<div class='outer' >
@@ -123,9 +123,10 @@ import { fix_and_destroy_block, missing_component } from "svelte/internal";
 	h1 {
 		color: #ff3e00;
 		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		font-size: 5em;
+		font-weight: 400;
 		margin-bottom: .25rem;
+		margin-top: -.3em;
 	}
 
 	@media (min-width: 640px) {
