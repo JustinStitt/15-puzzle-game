@@ -62,3 +62,43 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.ominous-hover {
+	animation: float 7s ease-in-out infinite;
+	/* text-shadow: 4px 4px #5c1515; */
+	text-shadow: 0px 1px aliceblue, 5px 5px 5px rgba(140, 148, 160, 0.479);
+}
+
+@keyframes float {
+	0% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(0, 7px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+.color-wave {
+	animation: _color-wave_ 25s ease-in-out infinite;
+}
+
+@keyframes _color-wave_ {
+	0% {
+		background-color: palevioletred;
+	}
+	25% {
+		background-color: rgb(216, 112, 190);
+	}
+	50% {
+		background-color: rgb(178, 112, 216);
+	}
+	75% {
+		background-color: rgb(216, 112, 190);
+	}
+	100% {
+		background-color: palevioletred;
+	}
+}

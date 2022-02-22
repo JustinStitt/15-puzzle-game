@@ -14,7 +14,7 @@
 
 <!--html-->
 <button on:click|preventDefault>
-    <div class="outer">
+    <div class="outer color-wave">
         {#if value != 0}
             <tile style={`font-size: ${font_size}em`}>
                 {value}
@@ -43,6 +43,9 @@ button:focus {
     background: none;
     color:  none;
 }
+button:active {
+    transform: scale(1.08);
+}
 
 .empty {
     opacity: 0;
@@ -60,8 +63,10 @@ button:focus {
     display: flex;
     align-items: center;
     vertical-align: middle;
-
     justify-content: center;
+
+    box-shadow: 2px 2px 10px 10px #424242;
+
 }
 
 tile {

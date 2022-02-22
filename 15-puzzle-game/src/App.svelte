@@ -43,7 +43,7 @@ import { fix_and_destroy_block, missing_component } from "svelte/internal";
 </script>
 
 <main>
-	<h1 class:win={win}>Solve{#if win}d{/if}</h1>
+	<h1 class:win={win} class='ominous-hover'>Solve{#if win}d{/if}</h1>
 	
 	<div class='outer' >
 		<Grid {size} on:win={handleWin}/>
