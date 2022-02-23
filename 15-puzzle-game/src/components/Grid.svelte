@@ -67,7 +67,6 @@
                 legal_moves.push(j)
             }
             var r = Math.floor(Math.random() * legal_moves.length)
-
             var _tmp = tiles[legal_moves[r]]
             tiles[legal_moves[r]] = tiles[eni]
             tiles[eni] = _tmp
@@ -78,9 +77,10 @@
 
     const newArray = (_s) => {
         tiles = Array.from(Array(_s).keys()) 
+        var front = tiles.shift()
+        tiles.push(front)
         dim = Math.sqrt(tiles.length)
-        randomize(100 * size)
-        console.log(tiles)
+        randomize(200 * size)
     }
 
     $: {
